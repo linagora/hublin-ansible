@@ -1,0 +1,21 @@
+---
+- include: Debian.yml
+  when: ansible_os_family == "Debian"
+  tags: hublin
+
+- include: RedHat.yml
+  when: ansible_os_family == "RedHat"
+  tags: hublin
+
+- name: Clone hublin repository
+  git: >
+    repo=https://ci.open-paas.org/stash/scm/meet/meetings.git
+    dest=/srv/hublin
+  tags: hublin
+
+- name: Install hublin dependencies (npm+bower)
+  command: >
+      npm install
+      chdir=/srv/hublin
+      creates=/srv/hublin/npm-debug.log
+  tags: hublin
