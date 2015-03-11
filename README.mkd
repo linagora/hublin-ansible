@@ -1,6 +1,21 @@
 Ansible-hublin : Quickly deploy hubl.in instance using Ansible
 ==============================================================
 
+Notice about certificates
+-------------------------
+
+This playbook requires openpaas.org wildcard certificates.
+
+For security reasons, they can't be stored in this repository.
+
+Please place them in certs directory as below before using this playbook.
+
+```.bash
+user@host:ansible-hublin$ ls -1 certs/
+wildcard-openpaas.org.crt
+wildcard-openpaas.org.key
+```
+
 Remote hosts deployment
 -----------------------
 
