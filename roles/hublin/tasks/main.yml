@@ -15,7 +15,7 @@
 
 - name: Install hublin dependencies (npm+bower)
   command: >
-      npm install
-      chdir=/srv/hublin
-      creates=/srv/hublin/npm-debug.log
+    npm install
+    chdir=/srv/hublin
+    creates=/srv/hublin/npm-debug.log
   tags: hublin
