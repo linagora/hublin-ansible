@@ -24,7 +24,7 @@
     "level": "debug",
     "appIceServers": [
         {"url": "stun:{{ inventory_hostname }}:3478"},
-        {"url": "turn:{{ inventory_hostname }}:3478", "username": "username1", "credential": "key1"}
+        {"url": "turn:{{ inventory_hostname }}:3478", "username": "hublin", "credential": "{{ coturn_password.stdout }}"}
     ]
   },
   "log": {
