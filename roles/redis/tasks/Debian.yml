@@ -1,0 +1,7 @@
+---
+- name: Install Debian packages
+  apt: >
+    pkg=redis-server
+    state=present
+    update_cache=yes
+  tags: redis

@@ -1,0 +1,8 @@
+---
+- include: Debian.yml
+  when: ansible_os_family == "Debian"
+  tags: mongo
+
+- include: RedHat.yml
+  when: ansible_os_family == "RedHat"
+  tags: mongo

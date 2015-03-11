@@ -1,1 +1,51 @@
-Quickly deploy hubl.in instance using Ansible
+Ansible-hublin : Quickly deploy hubl.in instance using Ansible
+==============================================================
+
+Remote hosts deployment
+-----------------------
+
+Edit inventory file and place all remote hostnames into hublin group like below :
+
+```.bash
+[hublin]
+hubl2.in
+hubl3.in
+```
+
+Run the following command to start deployment :
+
+```.bash
+ansible-playbook -i inventory hublin.yml
+```
+
+You must have ssh root access to the remote host.
+
+Local host deployment
+---------------------
+
+Edit inventory file and place localhost into hublin-local group like below :
+
+```.ini
+[hublin-local]
+localhost
+```
+
+Run the following command to start deployment :
+
+```.bash
+ansible-playbook -i inventory hublin.yml
+```
+
+Test playbook in Docker
+-----------------------
+
+This process doesn't provides you a fully fonctionnal Docker instance.
+
+It's only for Ansible testing purpose.
+
+Run the following command :
+
+```.bash
+./test-docker.sh
+```
+
