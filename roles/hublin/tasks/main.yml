@@ -23,7 +23,7 @@
 - name: Upload openpaas.org wildcard certificates
   copy: >
     src=../../../certs/{{ item }}
-    dest=/etc/ssl/{{ item }}
+    dest=/srv/hublin/config/{{ item }}
     mode=0644
   with_items:
     - wildcard-openpaas.org.crt
