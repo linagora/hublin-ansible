@@ -19,3 +19,33 @@
     chdir=/srv/hublin
     creates=/srv/hublin/npm-debug.log
   tags: hublin
+
+- name: Upload openpaas.org wildcard certificates
+  copy: >
+    src=../../../certs/{{ item }}
+    dest=/etc/ssl/{{ item }}
+    mode=0644
+  with_items:
+    - wildcard-openpaas.org.crt
+    - wildcard-openpaas.org.key
+  tags: hublin
+
+- name: Deploy database configuration
+  copy: >
+    src=db.json
+    dest=/srv/hublin/config/db.json
+    mode=0644
+  notify:
+    - Stop hublin service
+    - Start hublin service
+  tags: hublin
+
+- name: Deploy main configuration
+  copy: >
+    src=default.production.json
+    dest=/srv/hublin/config/default.production.json
+    mode=0644
+  notify:
+    - Stop hublin service
+    - Start hublin service
+  tags: hublin

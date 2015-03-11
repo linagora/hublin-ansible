@@ -1,0 +1,55 @@
+{
+  "app": {
+    "name": "Linagora Meetings"
+  },
+  "webserver": {
+    "enabled": true,
+    "debugPort": 8081,
+
+    "ssl_ip": "0.0.0.0",
+    "ssl_ipv6": "::",
+    "ssl_port": 443,
+    "ssl_key": "config/wildcard-openpaas.org.key",
+    "ssl_cert": "config/wildcard-openpaas.org.crt",
+
+    "virtualhosts": [],
+    "startupBufferTimeout": 5000
+  },
+  "wsserver": {
+    "enabled": true,
+    "port": 443
+  },
+  "webrtc": {
+    "enabled": true,
+    "level": "debug",
+    "appIceServers": [
+        {"url": "stun:{{ inventory_hostname }}:3478"},
+        {"url": "turn:{{ inventory_hostname }}:3478", "username": "username1", "credential": "key1"}
+    ]
+  },
+  "log": {
+    "file": {
+      "enabled": true,
+      "filename": "./log/application.log",
+      "level": "info",
+      "handleExceptions": true,
+      "json": false,
+      "prettyPrint": true,
+      "colorize": false
+    },
+    "console": {
+      "enabled": true,
+      "level": "debug",
+      "handleExceptions": true,
+      "json": false,
+      "prettyPrint": true,
+      "colorize": true
+    }
+  },
+  "emailInvitation": {
+    "templatesDir": "./templates/email"
+  },
+  "modules": [
+    "linagora.io.meetings"
+  ]
+}

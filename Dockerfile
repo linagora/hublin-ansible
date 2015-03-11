@@ -27,6 +27,6 @@ RUN ansible-playbook -i inventory hublin.yml --tags mongo
 # Deploy redis on hublin host using Ansible
 RUN ansible-playbook -i inventory hublin.yml --tags redis
 
-# Deploy hublin on hublin host using Ansible
-RUN ansible-playbook -i inventory hublin.yml --tags hublin
+# Deploy hublin and coturn on hublin host using Ansible
+RUN ansible-playbook -i inventory hublin.yml --tags hublin,turn
 

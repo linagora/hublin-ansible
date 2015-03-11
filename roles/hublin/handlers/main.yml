@@ -1,0 +1,8 @@
+---
+- name: Stop hublin service
+  service: name=coturn state=stopped
+  tags: hublin
+
+- name: Start hublin service
+  service: name=coturn state=started
+  tags: hublin
