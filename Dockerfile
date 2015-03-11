@@ -22,10 +22,10 @@ RUN echo 'localhost' >> /home/hublin/inventory
 RUN ansible-playbook -i inventory hublin.yml --tags node
 
 # Deploy mongodb on hublin host using Ansible
-RUN ansible-playbook -i inventory hublin.yml --tags mongo
+#RUN ansible-playbook -i inventory hublin.yml --tags mongo
 
 # Deploy redis on hublin host using Ansible
-RUN ansible-playbook -i inventory hublin.yml --tags redis
+#RUN ansible-playbook -i inventory hublin.yml --tags redis
 
 # Deploy hublin and coturn on hublin host using Ansible
 RUN ansible-playbook -i inventory hublin.yml --tags hublin,turn

@@ -1,19 +1,15 @@
 ---
-- hosts: hublin-local
+- hosts: hublin-slave-local
   connection: local
   vars_files:
     - config.yml
   roles:
     - node
-    - mongodb
-    - redis
     - hublin
 
-- hosts: hublin
+- hosts: hublin-slave
   vars_files:
     - config.yml
   roles:
     - node
-    - mongodb
-    - redis
     - hublin
