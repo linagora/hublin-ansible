@@ -1,0 +1,17 @@
+---
+- name: Install Wheezy Backports repository
+  apt_repository: >
+    repo='deb http://ftp.fr.debian.org/debian wheezy-backports main'
+    state=present
+  tags: mongo
+
+- name: Install Debian packages
+  apt: >
+    pkg={{ item }}
+    state=present
+    default_release=wheezy-backports
+    update_cache=yes
+  with_items:
+      - mongodb
+      - mongodb-clients
+  tags: mongo
