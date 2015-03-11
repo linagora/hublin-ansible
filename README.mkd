@@ -6,6 +6,8 @@ Notice about certificates
 
 This playbook requires openpaas.org wildcard certificates.
 
+Master serv deployment also requires hubl.in certificate.
+
 For security reasons, they can't be stored in this repository.
 
 Please place them in certs directory as below before using this playbook.
@@ -14,6 +16,7 @@ Please place them in certs directory as below before using this playbook.
 user@host:ansible-hublin$ ls -1 certs/
 wildcard-openpaas.org.crt
 wildcard-openpaas.org.key
+hubl.in.pem
 ```
 
 Remote hosts deployment
