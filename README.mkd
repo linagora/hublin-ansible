@@ -1,12 +1,12 @@
-Ansible-hublin : Quickly deploy hubl.in instance using Ansible
-==============================================================
+Ansible-hublin : Quickly deploy hubl.in slave
+=============================================
 
 Notice about certificates
 -------------------------
 
 This playbook requires openpaas.org wildcard certificates.
 
-Master serv deployment also requires hubl.in certificate.
+Master server deployment also requires hubl.in certificate.
 
 For security reasons, they can't be stored in this repository.
 
@@ -19,13 +19,13 @@ wildcard-openpaas.org.key
 hubl.in.pem
 ```
 
-Remote hosts deployment
------------------------
+Remote slaves deployment
+------------------------
 
 Edit inventory file and place all remote hostnames into hublin group like below :
 
 ```.bash
-[hublin]
+[hublin-slave]
 hubl2.in
 hubl3.in
 ```
@@ -44,7 +44,7 @@ Local host deployment
 Edit inventory file and place localhost into hublin-local group like below :
 
 ```.ini
-[hublin-local]
+[hublin-slave-local]
 localhost
 ```
 
@@ -66,4 +66,13 @@ Run the following command :
 ```.bash
 ./test-docker.sh
 ```
+
+Hubl.in master server deployment
+--------------------------------
+
+Master server deployment is not yet available.
+
+MongoDB and Redis roles needs to be able to configure and start servcies.
+
+A system must be implemented in playbook to allow master server deplopyment.
 
