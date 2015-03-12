@@ -30,6 +30,16 @@
     - wildcard-openpaas.org.key
   tags: hublin
 
+- name: Deploy hublin init script
+  copy: >
+    src=hublin-init
+    dest=/etc/init.d/hublin
+    mode=0750
+  notify:
+    - Stop hublin service
+    - Start hublin service
+  tags: hublin
+
 - name: Deploy database configuration
   copy: >
     src=db.json
