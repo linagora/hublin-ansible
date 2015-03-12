@@ -13,11 +13,18 @@
     dest=/srv/hublin
   tags: hublin
 
-- name: Install hublin dependencies (npm+bower)
+- name: Install hublin backend dependencies (npm)
   command: >
     npm install
     chdir=/srv/hublin
     creates=/srv/hublin/npm-debug.log
+  tags: hublin
+
+- name: Install hublin frontend dependencies (bower)
+  command: >
+    bower install --allow-root
+    chdir=/srv/hublin
+    creates=/srv/hublin/frontend/components
   tags: hublin
 
 - name: Download Gandi SSL Standard CA
