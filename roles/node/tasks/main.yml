@@ -15,7 +15,7 @@
   tags: node
 
 - name: Download nodejs {{nodejs_version_tag}}
-  get_url: url={{nodejs_tarball_url}} dest={{nodejs_tmp_dir}}{{nodejs_file_name}} timeout=120
+  get_url: url={{nodejs_tarball_url}} dest={{nodejs_tmp_dir}}{{nodejs_file_name}}
   when: wanted_version_installed.rc == 1
   tags: node
 
