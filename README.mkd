@@ -22,7 +22,7 @@ hubl.in.pem
 Remote slaves deployment
 ------------------------
 
-Edit inventory file and place all remote hostnames into hublin group like below :
+Edit inventory file and place all remote hostnames into hublin-slave group like below :
 
 ```.bash
 [hublin-slave]
@@ -38,10 +38,10 @@ ansible-playbook -i inventory hublin.yml
 
 You must have ssh root access to the remote host.
 
-Local host deployment
----------------------
+Local slave deployment
+----------------------
 
-Edit inventory file and place localhost into hublin-local group like below :
+Edit inventory file and place localhost into hublin-slave-local group like below :
 
 ```.ini
 [hublin-slave-local]
