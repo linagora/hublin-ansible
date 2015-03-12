@@ -38,6 +38,6 @@
   tags: turn
 
 - name: Print generated coturn password
-  debug: "msg=Generated TURN credentials : hublin / {{ coturn_password.stdout }}"
+  debug: msg="Generated TURN credentials - hublin / {{ coturn_password.stdout }} -"
   tags: turn
 
