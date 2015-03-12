@@ -2,9 +2,9 @@
 
 # Put hosts in this group to deploy
 # remote hublin servers
-[hublin]
+[hublin-slave]
 
 # Put localhost in this group to deploy
 # local hublin server
-[hublin-local]
+[hublin-slave-local]
 

@@ -1,0 +1,21 @@
+---
+- name: Install pwgen
+  apt: pkg=pwgen state=latest update_cache=yes
+
+- name: Download Coturn tarball
+  get_url: >
+    url={{ coturn_deb_tarball_url }}
+    dest=/tmp/{{ coturn_deb_file_name }}
+    sha256sum={{ coturn_deb_tarball_sha }}
+  tags: turn
+
+- name: Extract Coturn deb package
+  command: >
+    tar -zxf /tmp/{{ coturn_deb_file_name }}
+    chdir=/tmp
+    creates=/tmp/coturn_{{ coturn_version }}-1_amd64.deb
+  tags: turn
+
+- name: Install extracted deb package
+  apt: deb=/tmp/coturn_{{ coturn_version }}-1_amd64.deb
+  tags: turn

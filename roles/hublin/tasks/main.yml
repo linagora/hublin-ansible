@@ -13,9 +13,63 @@
     dest=/srv/hublin
   tags: hublin
 
-- name: Install hublin dependencies (npm+bower)
+- name: Install hublin backend dependencies (npm)
   command: >
-      npm install
-      chdir=/srv/hublin
-      creates=/srv/hublin/npm-debug.log
+    npm install
+    chdir=/srv/hublin
+    creates=/srv/hublin/npm-debug.log
+  tags: hublin
+
+- name: Install hublin frontend dependencies (bower)
+  command: >
+    bower install --allow-root
+    chdir=/srv/hublin
+    creates=/srv/hublin/frontend/components
+  tags: hublin
+
+- name: Download Gandi SSL Standard CA
+  get_url: >
+    url=http://crt.gandi.net/GandiStandardSSLCA.crt
+    dest=/srv/hublin/config/GandiStandardSSLCA.crt
+    mode=0644
+  tags: hublin
+
+- name: Upload open-paas.org wildcard certificates
+  copy: >
+    src=../../../certs/{{ item }}
+    dest=/srv/hublin/config/{{ item }}
+    mode=0644
+  with_items:
+    - wildcard-openpaas.org.crt
+    - wildcard-openpaas.org.key
+  tags: hublin
+
+- name: Deploy hublin init script
+  copy: >
+    src=hublin-init
+    dest=/etc/init.d/hublin
+    mode=0750
+  notify:
+    - Stop hublin service
+    - Start hublin service
+  tags: hublin
+
+- name: Deploy database configuration
+  copy: >
+    src=db.json
+    dest=/srv/hublin/config/db.json
+    mode=0644
+  notify:
+    - Stop hublin service
+    - Start hublin service
+  tags: hublin
+
+- name: Deploy main configuration
+  template: >
+    src=default.production.json
+    dest=/srv/hublin/config/default.production.json
+    mode=0644
+  notify:
+    - Stop hublin service
+    - Start hublin service
   tags: hublin

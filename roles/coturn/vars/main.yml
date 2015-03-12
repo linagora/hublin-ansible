@@ -1,0 +1,9 @@
+---
+coturn_version: "4.4.2.3"
+coturn_version_tag: "v{{coturn_version}}"
+coturn_file_tag: "turnserver-{{coturn_version}}"
+coturn_deb_tag: "debian-wheezy-ubuntu-mint-x86-64bits"
+coturn_deb_file_name: "{{coturn_file_tag}}-{{coturn_deb_tag}}.tar.gz"
+coturn_base_url: "http://turnserver.open-sys.org/downloads/{{coturn_version_tag}}/"
+coturn_deb_tarball_url: "{{ coturn_base_url }}{{ coturn_deb_file_name }}"
+coturn_deb_tarball_sha: "6f45fe8cfb920268e167c7dccd14352f0961bfdb08879b3ddc75bd38da0b0217"

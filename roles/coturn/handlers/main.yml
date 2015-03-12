@@ -1,0 +1,4 @@
+---
+- name: Restart coturn service
+  service: name=coturn state=restarted
+  tags: turn
