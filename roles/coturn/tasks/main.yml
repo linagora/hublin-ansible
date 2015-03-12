@@ -8,7 +8,7 @@
   tags: turn
 
 - name: Generate coturn hublin password
-  command: >
+  shell: >
     pwgen -cn 24 -1 > /etc/turnserver.conf.password
     creates=/etc/turnserver.conf.password
   tags: turn
@@ -38,6 +38,6 @@
   tags: turn
 
 - name: Print generated coturn password
-  debug: msg=Generated TURN credentials : hublin / {{ coturn_password.stdout }}
+  debug: "msg=Generated TURN credentials : hublin / {{ coturn_password.stdout }}"
   tags: turn
 
