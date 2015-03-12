@@ -51,7 +51,7 @@
   tags: hublin
 
 - name: Deploy main configuration
-  copy: >
+  template: >
     src=default.production.json
     dest=/srv/hublin/config/default.production.json
     mode=0644

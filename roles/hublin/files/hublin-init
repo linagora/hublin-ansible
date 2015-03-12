@@ -21,7 +21,7 @@ status () {
   _res=$?
   [ $_res -eq 0 ] && echo "hublin is running"
   [ $_res -eq 1 ] && echo "hublin is not running"
-  echo $STATUS
+  exit $_res
 }
 
 start () {
