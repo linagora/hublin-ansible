@@ -20,7 +20,14 @@
     creates=/srv/hublin/npm-debug.log
   tags: hublin
 
-- name: Upload openpaas.org wildcard certificates
+- name: Download Gandi SSL Standard CA
+  get_url: >
+    url=http://crt.gandi.net/GandiStandardSSLCA.crt
+    dest=/srv/hublin/config/GandiStandardSSLCA.crt
+    mode=0644
+  tags: hublin
+
+- name: Upload open-paas.org wildcard certificates
   copy: >
     src=../../../certs/{{ item }}
     dest=/srv/hublin/config/{{ item }}
