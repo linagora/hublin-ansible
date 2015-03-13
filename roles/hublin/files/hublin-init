@@ -34,7 +34,7 @@ start () {
 stop () {
   get_status
   _res=$?
-  [ $_res -eq 1 ] || exec forever stop "$SERVERNAME"
+  [ $_res -eq 1 ] || forever stop "$SERVERNAME"
 }
 
 function help {
@@ -59,8 +59,13 @@ case "$1" in
     status
   ;;
 
+  help)
+    help
+  ;;
+
   *)
     help
+    exit 1
   ;;
 
 esac
