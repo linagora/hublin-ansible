@@ -1,7 +1,11 @@
 ## Main inventory file ##
 
+# Put a host in this group to deploy
+# a remote hublin master server
+[hublin-master]
+
 # Put hosts in this group to deploy
-# remote hublin servers
+# remote hublin slave servers
 [hublin-slave]
 
 # Put localhost in this group to deploy

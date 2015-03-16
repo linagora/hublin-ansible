@@ -6,4 +6,8 @@
 # Don't remove this line
 config_version: 0.1
 
-
+# Configure master server name
+# Used for salves deployement
+# Can be overrided on a per-host basis
+# using host_vars/slave_name files
+# master_server = 
