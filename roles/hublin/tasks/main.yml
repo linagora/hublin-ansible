@@ -50,8 +50,7 @@
     dest=/etc/init.d/hublin
     mode=0750
   notify:
-    - Stop hublin service
-    - Start hublin service
+    - Restart hublin service
   tags: hublin
 
 - name: Deploy database configuration

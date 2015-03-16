@@ -54,25 +54,18 @@ Run the following command to start deployment :
 ansible-playbook -i inventory hublin.yml
 ```
 
-Test playbook in Docker
------------------------
-
-This process doesn't provides you a fully fonctionnal Docker instance.
-
-It's only for Ansible testing purpose.
-
-Run the following command :
-
-```.bash
-./test-docker.sh
-```
-
 Hubl.in master server deployment
 --------------------------------
 
-Master server deployment is not yet available.
+Edit inventory file and place localhost into hublin-slave-local group like below :
 
-MongoDB and Redis roles needs to be able to configure and start servcies.
+```.ini
+[hublin-master]
+hubl.in
+```
+Run the following command to start deployment :
 
-A system must be implemented in playbook to allow master server deplopyment.
+```.bash
+ansible-playbook -i inventory hublin.yml
+```
 

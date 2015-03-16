@@ -1,0 +1,4 @@
+---
+- name: Restart mongodb service
+  service: name=mongodb state=restarted enabled=true
+  tags: mongo
