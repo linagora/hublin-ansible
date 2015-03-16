@@ -6,3 +6,25 @@
 - include: RedHat.yml
   when: ansible_os_family == "RedHat"
   tags: mongo
+
+- name: Upload hubl.in master certificate
+  copy: >
+    src=../../../certs/hubl.in.pem
+    dest=/etc/ssl/hubl.in.pem
+    mode=0644
+  notify:
+    - Restart mongodb service
+  tags: mongo
+
+- name: Handle mongodb SSL confiugration
+  lineinfile: >
+    dest=/etc/mongodb.conf
+    regexp={{ item.regexp }}
+    line={{ item.line }}
+    state=present
+  with_items:
+    - { regexp: "^sslOnNormalPorts", line: "sslOnNormalPorts = true" }
+    - { regexp: "^sslPEMKeyFile", line: "sslPEMKeyFile = /etc/ssl/hubl.in.pem" }
+  notify:
+    - Restart mongodb service
+  tags: mongo
