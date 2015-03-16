@@ -1,8 +1,4 @@
 ---
-- name: Stop hublin service
-  service: name=hublin state=stopped
-  tags: hublin
-
-- name: Start hublin service
-  service: name=hublin state=started
+- name: Restart hublin service
+  service: name=hublin state=restarted enabled=true
   tags: hublin
