@@ -1,0 +1,3 @@
+---
+certfile: "{% if inventory_hostname in groups['hublin-master'] %}{{ master_certfile }}{% else %}{{ slave_certfile }}{% endif %}"
+keyfile: "{% if inventory_hostname in groups['hublin-master'] %}{{ master_keyfile }}{% else %}{{ slave_keyfile }}{% endif %}"

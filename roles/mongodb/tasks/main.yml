@@ -7,16 +7,19 @@
   when: ansible_os_family == "RedHat"
   tags: mongo
 
-- name: Upload hubl.in master certificate
+- name: Upload SSL certificate
   copy: >
-    src=../../../certs/hubl.in.pem
-    dest=/etc/ssl/hubl.in.pem
+    src=../../../certs/{{ item }}
+    dest=/etc/ssl/{{ item }}
     mode=0644
+  with_items:
+    - {{ certfile }}
+    - {{ keyfile }}
   notify:
     - Restart mongodb service
   tags: mongo
 
-- name: Handle mongodb SSL confiugration
+- name: Handle mongodb SSL configuration
   lineinfile: >
     dest=/etc/mongodb.conf
     regexp={{ item.regexp }}
@@ -24,7 +27,7 @@
     state=present
   with_items:
     - { regexp: "^sslOnNormalPorts", line: "sslOnNormalPorts = true" }
-    - { regexp: "^sslPEMKeyFile", line: "sslPEMKeyFile = /etc/ssl/hubl.in.pem" }
+    - { regexp: "^sslPEMKeyFile", line: "sslPEMKeyFile = /etc/ssl/{{ keyfile }}" }
   notify:
     - Restart mongodb service
   tags: mongo

@@ -1,8 +1,17 @@
 ---
 - include: Debian.yml
   when: ansible_os_family == "Debian"
-  tags: mongo
+  tags: redis
 
 - include: RedHat.yml
   when: ansible_os_family == "RedHat"
-  tags: mongo
+  tags: redis
+
+- name: Provide redis configuration file
+  template: >
+    src=redis.conf
+    dest=/etc/redis/redis.conf
+    mode=0644
+  notify:
+    - Restart redis service
+  tags: redis

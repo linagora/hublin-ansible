@@ -1,0 +1,4 @@
+---
+- name: Install Debian packages
+  apt: pkg=nginx-full state=latest update_cache=yes
+  tags: node

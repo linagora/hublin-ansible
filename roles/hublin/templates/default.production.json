@@ -4,20 +4,19 @@
   },
   "webserver": {
     "enabled": true,
-    "debugPort": 8081,
+    "debugPort": {{ hublin_debug_port }},
 
-    "ssl_ip": "0.0.0.0",
-    "ssl_ipv6": "::",
-    "ssl_port": 443,
-    "ssl_key": "config/wildcard-openpaas.org.key",
-    "ssl_cert": "config/wildcard-openpaas.org.crt",
+    "ip": "127.0.0.1",
+    "ipv6": "",
+    "ssl_ip": "",
+    "port": {{ hublin_port }},
 
     "virtualhosts": [],
     "startupBufferTimeout": 5000
   },
   "wsserver": {
     "enabled": true,
-    "port": 443
+    "port": {{ hublin_port }}
   },
   "webrtc": {
     "enabled": true,

@@ -1,1 +1,0 @@
-{"connectionOptions":{"db":{"w":1,"fsync":true,"native_parser":true},"server":{"socketOptions":{"keepAlive":10000,"connectTimeoutMS":10000},"auto_reconnect":true,"poolSize":10,"ssl":true}},"connectionString":"mongodb://hublin:Hiehiefiegh2@hubl.in:27017/hublin"}

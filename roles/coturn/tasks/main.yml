@@ -18,14 +18,14 @@
   register: coturn_password
   tags: turn
 
-- name: Upload openpaas.org wildcard certificates
+- name: Upload SSL certificates
   copy: >
     src=../../../certs/{{ item }}
     dest=/etc/ssl/{{ item }}
     mode=0644
   with_items:
-    - wildcard-openpaas.org.crt
-    - wildcard-openpaas.org.key
+    - {{ certfile }}
+    - {{ keyfile }}
   tags: turn
 
 - name: Provide coturn configuration file
