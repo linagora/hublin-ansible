@@ -13,5 +13,6 @@
     update_cache=yes
   with_items:
       - mongodb
+      - python-pymongo
       - mongodb-clients
   tags: mongo

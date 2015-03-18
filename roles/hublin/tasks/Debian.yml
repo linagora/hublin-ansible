@@ -6,4 +6,5 @@
     update_cache=yes
   with_items:
     - git
+    - mongodb-clients
   tags: hublin

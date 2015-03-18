@@ -14,48 +14,64 @@ config_version: 0.1
 ### MASTER SERVER CONFIGURATION ###
 
 # Hostname of master server
-master_server = groups['hublin-master'][0]
+master_server: "{{ groups['hublin-master'][0] }}"
+
+### NODE CONFIGURATION ###
+# Build node from source (not needed anymore)
+node_build: false
 
 ### MONGODB CONFIGURATION ###
 
 # Hostname of mongodb server
-mongodb_host = {{ master_server }}
+mongodb_host: "{{ master_server }}"
 
 # Port of mongodb server
-mongodb_port = 27017
+mongodb_port: 27017
+
+# Mongodb admin user
+mongodb_admin_user: "siteUserAdmin"
+
+# Mongodb admin password
+mongodb_admin_password: "hublin"
 
 # Mongodb database name
-mongodb_database = hublin
+mongodb_database: "hublin"
 
 # User of mongodb database
-mongodb_user = hublin
+mongodb_user: "hublin"
 
 # Password of mongodb user
-mongodb_password = hublin
+mongodb_password: "hublin"
 
 ### REDIS CONFIGURATION ###
 
 # Hostname of redis server
-redis_host = {{ master_server }}
+redis_host: "{{ master_server }}"
 
 # Port of redis server
-redis_port = 6379
+redis_port: 6379
 
 # Password of redis server
-redis_password = hublin
+redis_password: "hublin"
 
 ### COTURN CONFIGURATION ###
 
 # Port of coturn server
-coturn_port = 3478
+coturn_port: 3478
+
+# User of coturnb server
+coturn_user: "hublin"
+
+# Password of coturn server
+coturn_password: "hublin"
 
 ### HUBLIN CONFIGURATION ###
 
 # Hublin port
-hublin_port = 8001
+hublin_port: 8001
 
 # HUblin debug port
-hublin_debug_port = 8081
+hublin_debug_port: 8081
 
 ### SSL CERTIFICATES CONFIGURATION ###
 
@@ -63,14 +79,19 @@ hublin_debug_port = 8081
 # You'll probably need to update these options on a per-host basis.
 
 # Certificate file of master hosts
-master_certfile = hubl.in.pem
+master_certfile: "hubl.in.pem"
 
 # Key file of master hosts
-master_keyfile = hubl.in.pem
+master_keyfile: "hubl.in.pem"
+
+# CA file of master hosts
+master_cafile: "GandiStandardSSLCA.crt"
 
 # Certificate file of slave hosts
-slave_certfile = wildcard-openpaas.org.crt
+slave_certfile: "wildcard-openpaas.org.crt"
 
 # Key file of slave hosts
-slave_keyfile = wildcard-openpaas.org.key
+slave_keyfile: "wildcard-openpaas.org.key"
 
+# CA file of slave hosts
+slave_cafile: "GandiStandardSSLCA.crt"

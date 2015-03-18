@@ -7,25 +7,14 @@
   when: ansible_os_family == "RedHat"
   tags: turn
 
-- name: Generate coturn hublin password
-  shell: >
-    pwgen -cn 24 -1 > /etc/turnserver.conf.password
-    creates=/etc/turnserver.conf.password
-  tags: turn
-
-- name: Read generated password
-  command: cat /etc/turnserver.conf.password
-  register: coturn_password
-  tags: turn
-
 - name: Upload SSL certificates
   copy: >
     src=../../../certs/{{ item }}
     dest=/etc/ssl/{{ item }}
     mode=0644
   with_items:
-    - {{ certfile }}
-    - {{ keyfile }}
+    - "{{ certfile }}"
+    - "{{ keyfile }}"
   tags: turn
 
 - name: Provide coturn configuration file
@@ -36,8 +25,3 @@
   notify:
     - Restart coturn service
   tags: turn
-
-- name: Print generated coturn password
-  debug: msg="Generated TURN credentials - hublin / {{ coturn_password.stdout }} -"
-  tags: turn
-

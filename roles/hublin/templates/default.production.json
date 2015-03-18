@@ -7,9 +7,14 @@
     "debugPort": {{ hublin_debug_port }},
 
     "ip": "127.0.0.1",
-    "ipv6": "",
-    "ssl_ip": "",
+    "ipv6": null,
     "port": {{ hublin_port }},
+
+    "ssl_ip": null,
+    "ssl_ipv6": null,
+    "ssl_port": null,
+    "ssl_key": null,
+    "ssl_cert": null,
 
     "virtualhosts": [],
     "startupBufferTimeout": 5000
@@ -23,7 +28,7 @@
     "level": "debug",
     "appIceServers": [
         {"url": "stun:{{ inventory_hostname }}:3478"},
-        {"url": "turn:{{ inventory_hostname }}:3478", "username": "hublin", "credential": "{{ coturn_password.stdout }}"}
+        {"url": "turn:{{ inventory_hostname }}:3478", "username": "hublin", "credential": "{{ coturn_password }}"}
     ]
   },
   "log": {

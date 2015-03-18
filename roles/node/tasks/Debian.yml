@@ -11,4 +11,32 @@
     - libsasl2-2
     - libsasl2-dev
     - libcurl3
+    - apt-transport-https
+    - lsb-release
+  tags: node
+
+- name: Add nodesource.com wheezy repository
+  apt_repository: >
+    repo="deb https://deb.nodesource.com/node_0.10 wheezy main"
+    state=present
+  when: node_build == false and ansible_lsb.major_release == "7"
+  tags: node
+
+- name: Add nodesource.com jessie repository
+  apt_repository: >
+    repo="deb https://deb.nodesource.com/node_0.10 jessie main"
+    state=present
+  when: node_build == false and ansible_lsb.major_release == "8"
+  tags: node
+
+- name: Add nodesource.com GPG key
+  apt_key: >
+    url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    state=present
+  when: node_build == false
+  tags: node
+
+- name: Install nodejs package
+  apt: pkg=nodejs state=latest update_cache=yes
+  when: node_build == false
   tags: node
