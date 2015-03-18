@@ -1,4 +1,14 @@
 ---
+- name: Install Wheezy Backports repository
+  apt_repository: >
+    repo='deb http://ftp.fr.debian.org/debian wheezy-backports main'
+    state=present
+  tags: nginx
+
 - name: Install Debian packages
-  apt: pkg=nginx-full state=latest update_cache=yes
-  tags: node
+  apt: >
+    pkg=nginx-full
+    state=latest
+    default_release=wheezy-backports
+    update_cache=yes
+  tags: nginx

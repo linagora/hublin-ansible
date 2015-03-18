@@ -8,7 +8,7 @@
 - name: Install Debian packages
   apt: >
     pkg={{ item }}
-    state=present
+    state=latest
     default_release=wheezy-backports
     update_cache=yes
   with_items:
