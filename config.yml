@@ -6,8 +6,92 @@
 # Don't remove this line
 config_version: 0.1
 
-# Configure master server name
-# Used for salves deployement
-# Can be overrided on a per-host basis
-# using host_vars/slave_name files
-# master_server = 
+# This is the main configuration file.
+# Variables defined here are global for all hosts.
+# If needed, you can override then for a specific group or host
+# using files in group_vars or host_vars directory
+
+### MASTER SERVER CONFIGURATION ###
+
+# Hostname of master server
+master_server: "{{ groups['hublin-master'][0] }}"
+
+### NODE CONFIGURATION ###
+# Build node from source (not needed anymore)
+node_build: false
+
+### MONGODB CONFIGURATION ###
+
+# Hostname of mongodb server
+mongodb_host: "{{ master_server }}"
+
+# Port of mongodb server
+mongodb_port: 27017
+
+# Mongodb admin user
+mongodb_admin_user: "siteUserAdmin"
+
+# Mongodb admin password
+mongodb_admin_password: "hublin"
+
+# Mongodb database name
+mongodb_database: "hublin"
+
+# User of mongodb database
+mongodb_user: "hublin"
+
+# Password of mongodb user
+mongodb_password: "hublin"
+
+### REDIS CONFIGURATION ###
+
+# Hostname of redis server
+redis_host: "{{ master_server }}"
+
+# Port of redis server
+redis_port: 6379
+
+# Password of redis server
+redis_password: "hublin"
+
+### COTURN CONFIGURATION ###
+
+# Port of coturn server
+coturn_port: 3478
+
+# User of coturnb server
+coturn_user: "hublin"
+
+# Password of coturn server
+coturn_password: "hublin"
+
+### HUBLIN CONFIGURATION ###
+
+# Hublin port
+hublin_port: 8001
+
+# HUblin debug port
+hublin_debug_port: 8081
+
+### SSL CERTIFICATES CONFIGURATION ###
+
+# Files must be put in certs directory
+# You'll probably need to update these options on a per-host basis.
+
+# Certificate file of master hosts
+master_certfile: "hubl.in.pem"
+
+# Key file of master hosts
+master_keyfile: "hubl.in.pem"
+
+# CA file of master hosts
+master_cafile: "GandiStandardSSLCA.crt"
+
+# Certificate file of slave hosts
+slave_certfile: "wildcard-openpaas.org.crt"
+
+# Key file of slave hosts
+slave_keyfile: "wildcard-openpaas.org.key"
+
+# CA file of slave hosts
+slave_cafile: "GandiStandardSSLCA.crt"

@@ -7,24 +7,45 @@
   when: ansible_os_family == "RedHat"
   tags: mongo
 
-- name: Upload hubl.in master certificate
+- name: Upload SSL certificate
   copy: >
-    src=../../../certs/hubl.in.pem
-    dest=/etc/ssl/hubl.in.pem
+    src=../../../certs/{{ item }}
+    dest=/etc/ssl/{{ item }}
+    mode=0644
+  with_items:
+    - "{{ certfile }}"
+    - "{{ keyfile }}"
+  notify:
+    - Restart mongodb service
+  tags: mongo
+
+- name: Provide mongodb configuration file
+  template: >
+    src=mongodb.conf
+    dest=/etc/mongodb.conf
     mode=0644
   notify:
     - Restart mongodb service
   tags: mongo
 
-- name: Handle mongodb SSL confiugration
-  lineinfile: >
-    dest=/etc/mongodb.conf
-    regexp={{ item.regexp }}
-    line={{ item.line }}
-    state=present
-  with_items:
-    - { regexp: "^sslOnNormalPorts", line: "sslOnNormalPorts = true" }
-    - { regexp: "^sslPEMKeyFile", line: "sslPEMKeyFile = /etc/ssl/hubl.in.pem" }
-  notify:
-    - Restart mongodb service
+- name: Flush handlers
+  meta: flush_handlers
+  tags: mongo
+
+- name: Create mongodb admin user
+  command: >
+    mongo admin --ssl --eval "printjson(db.addUser({ user: '{{ mongodb_admin_user }}', pwd: '{{ mongodb_admin_password }}', roles: ['userAdminAnyDatabase'] }))"
+  failed_when: false
+  tags: mongo
+
+- name: Create mongodb hublin user
+  command: >
+    mongo admin -u {{ mongodb_admin_user }} -p {{ mongodb_admin_password }} --ssl --eval "db.getSiblingDB( '{{ mongodb_database }}' ).addUser({user: '{{ mongodb_user }}', pwd: '{{ mongodb_password }}', roles: ['readWrite','dbAdmin']})"
+  failed_when: false
+  tags: mongo
+
+- name: Insert redis configuration
+  command: >
+    mongo hublin -u {{ mongodb_user }} -p {{ mongodb_password }} --ssl --eval "db.configuration.insert({'_id': 'redis', 'host': '{{ redis_host }}', 'port': '{{ redis_port }}', 'client_options': {'auth_pass': '{{ redis_password }}'}})"
+  failed_when: false
   tags: mongo

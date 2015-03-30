@@ -4,27 +4,31 @@
   },
   "webserver": {
     "enabled": true,
-    "debugPort": 8081,
+    "debugPort": {{ hublin_debug_port }},
 
-    "ssl_ip": "0.0.0.0",
-    "ssl_ipv6": "::",
-    "ssl_port": 443,
-    "ssl_key": "config/wildcard-openpaas.org.key",
-    "ssl_cert": "config/wildcard-openpaas.org.crt",
+    "ip": "127.0.0.1",
+    "ipv6": null,
+    "port": {{ hublin_port }},
+
+    "ssl_ip": null,
+    "ssl_ipv6": null,
+    "ssl_port": null,
+    "ssl_key": null,
+    "ssl_cert": null,
 
     "virtualhosts": [],
     "startupBufferTimeout": 5000
   },
   "wsserver": {
     "enabled": true,
-    "port": 443
+    "port": {{ hublin_port }}
   },
   "webrtc": {
     "enabled": true,
     "level": "debug",
     "appIceServers": [
         {"url": "stun:{{ inventory_hostname }}:3478"},
-        {"url": "turn:{{ inventory_hostname }}:3478", "username": "hublin", "credential": "{{ coturn_password.stdout }}"}
+        {"url": "turn:{{ inventory_hostname }}:3478", "username": "hublin", "credential": "{{ coturn_password }}"}
     ]
   },
   "log": {

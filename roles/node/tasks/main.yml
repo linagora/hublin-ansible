@@ -12,27 +12,28 @@
   register: wanted_version_installed
   ignore_errors: True
   changed_when: "wanted_version_installed.rc == 1"
+  when: node_build == true
   tags: node
 
 - name: Download nodejs {{nodejs_version_tag}}
   get_url: url={{nodejs_tarball_url}} dest={{nodejs_tmp_dir}}{{nodejs_file_name}}
-  when: wanted_version_installed.rc == 1
+  when: node_build == true and wanted_version_installed.rc == 1
   tags: node
 
 - name: Verify SHASUM of nodejs {{nodejs_version_tag}}
   shell: curl {{nodejs_shasum_url}} | grep {{nodejs_file_name}} | sha1sum -c chdir={{nodejs_tmp_dir}}
-  when: wanted_version_installed.rc == 1
+  when: node_build == true and wanted_version_installed.rc == 1
   tags: node
 
 - name: Unpack nodejs {{nodejs_version_tag}}
   command: tar -xvzf {{nodejs_file_name}} chdir={{nodejs_tmp_dir}}
-  when: wanted_version_installed.rc == 1
+  when: node_build == true and wanted_version_installed.rc == 1
   tags: node
 
 - name: Compile and install nodejs {{nodejs_version_tag}}
   shell: ./configure --prefix={{nodejs_path}} && make && make install chdir={{nodejs_tmp_dir}}{{nodejs_file_tag}}
   sudo: true
-  when: wanted_version_installed.rc == 1
+  when: node_build == true and wanted_version_installed.rc == 1
   tags: node
 
 - name: NPM Install global packages

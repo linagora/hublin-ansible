@@ -1,7 +1,4 @@
 ---
-- name: Install pwgen
-  apt: pkg=pwgen state=latest update_cache=yes
-
 - name: Download Coturn tarball
   get_url: >
     url={{ coturn_deb_tarball_url }}

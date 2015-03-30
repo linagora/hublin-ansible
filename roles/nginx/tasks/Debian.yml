@@ -3,16 +3,12 @@
   apt_repository: >
     repo='deb http://ftp.fr.debian.org/debian wheezy-backports main'
     state=present
-  tags: mongo
+  tags: nginx
 
 - name: Install Debian packages
   apt: >
-    pkg={{ item }}
+    pkg=nginx-full
     state=latest
     default_release=wheezy-backports
     update_cache=yes
-  with_items:
-      - mongodb
-      - python-pymongo
-      - mongodb-clients
-  tags: mongo
+  tags: nginx

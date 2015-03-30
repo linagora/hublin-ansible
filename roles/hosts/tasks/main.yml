@@ -1,0 +1,9 @@
+---
+- name: Add host name to hosts file
+  lineinfile: >
+   line="127.0.0.1 {{ inventory_hostname }} {{ ansible_hostname }} localhost.localdomain localhost"
+   regexp="127\.0\.0\.1*"
+   dest=/etc/hosts
+   insertafter=BOF
+  tags:
+      - hosts

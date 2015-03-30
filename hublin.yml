@@ -1,19 +1,22 @@
 ---
+## Nginx is installed as dependencies of hublin role
 - hosts: hublin-master
-  vars_file:
+  vars_files:
     - config.yml
   roles:
     - hosts
     - mongodb
     - redis
+    - coturn
     - node
-    - hubin
+    - hublin
 
 - hosts: hublin-slave
   vars_files:
     - config.yml
   roles:
     - node
+    - coturn
     - hublin
 
 - hosts: hublin-slave-local
@@ -22,4 +25,5 @@
     - config.yml
   roles:
     - node
+    - coturn
     - hublin

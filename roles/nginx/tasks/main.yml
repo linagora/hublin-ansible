@@ -1,0 +1,37 @@
+---
+- include: Debian.yml
+  when: ansible_os_family == "Debian"
+  tags: nginx
+
+- include: RedHat.yml
+  when: ansible_os_family == "RedHat"
+  tags: nginx
+
+- name: Upload SSL certificates
+  copy: >
+    src=../../../certs/{{ item }}
+    dest=/etc/ssl/{{ item }}
+    mode=0644
+  with_items:
+    - "{{ certfile }}"
+    - "{{ keyfile }}"
+    - "{{ cafile }}"
+  tags: turn
+
+- name: Generate chained certificate
+  shell: >
+    cat {{ certfile }} {{ cafile }} > {{ certfile }}_chained
+    chdir=/etc/ssl
+    creates={{ certfile }}_chained
+  notify:
+    - Restart nginx service
+  tags: nginx
+
+- name: Push nginx virtualhost
+  template: >
+    src=virtualhost.conf
+    dest=/etc/nginx/sites-enabled/{{ external_url | default(inventory_hostname) }}.conf
+    mode=0644
+  notify:
+    - Restart nginx service
+  tags: nginx
